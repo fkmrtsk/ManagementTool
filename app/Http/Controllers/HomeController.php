@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models;
+use DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $total = $this->getTotalSavings();
+        return view('home', compact('total'));
+    }
+
+    private function getTotalSavings() {
+        $builder = Models\Saving::select(DB::raw("IFNULL(sum(savings), 0) as savings"))->where("del_flg","=","0");
+
+        return $builder->get()->toArray();
     }
 }
