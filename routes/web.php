@@ -28,3 +28,8 @@ Route::get('/money/salary/register', 'Money\MoneySalaryController@register')->na
 Route::post('/money/salary/register', 'Money\MoneySalaryController@registerCheck')->name('money_salary_registerCheck');
 Route::post('/money/salary/confirm', 'Money\MoneySalaryController@confirm')->name('money_salary_confirm');
 Route::get('/money/salary/complete', 'Money\MoneySalaryController@complete')->name('money_salary_complete');
+// 貯金額登録ページ
+Route::get('/money/savings/register', 'Money\MoneySavingsController@register')->name('money_savings_register');
+Route::post('/money/savings/register', 'Money\MoneySavingsController@registerCheck')->name('money_savings_registerCheck');
+Route::post('/money/savings/confirm', 'Money\MoneySavingsController@confirm')->name('money_savings_confirm');
+Route::get('/money/savings/complete', 'Money\MoneySavingsController@complete')->name('money_savings_complete');

@@ -264,6 +264,10 @@ return [
                     'url'  => 'money/salary/register',
                 ],
                 [
+                    'text' => 'SavingsRegister',
+                    'url'  => 'money/savings/register',
+                ],
+                [
                     'text' => 'Detail',
                     'url'  => 'money/detail',
                 ],
