@@ -260,6 +260,10 @@ return [
                     'url'  => 'money/register',
                 ],
                 [
+                    'text' => 'SalaryRegister',
+                    'url'  => 'money/salary/register',
+                ],
+                [
                     'text' => 'Detail',
                     'url'  => 'money/detail',
                 ],

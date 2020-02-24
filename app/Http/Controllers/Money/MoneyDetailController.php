@@ -15,7 +15,9 @@ class MoneyDetailController extends Controller
         $arrCategory    = $this->getCategory();
         $arrDispMonth   = $this->createDispMonth();
         $arrPayData     = $this->getPayData($arrDispMonth);
-        $arrMoneyDetail = $this->createMoneyDetail($arrCategory, $arrDispMonth, $arrPayData);
+        $arrSalaryData  = $this->getSalaryData($arrDispMonth);
+        $arrSavingData  = $this->getSavingData($arrDispMonth);
+        $arrMoneyDetail = $this->createMoneyDetail($arrCategory, $arrDispMonth, $arrPayData, $arrSalaryData, $arrSavingData);
 
         return view("money/detail", compact(
             'arrMoneyDetail',
@@ -58,7 +60,31 @@ class MoneyDetailController extends Controller
         return $builder->get()->toArray();
     }
 
-    private function createMoneyDetail($arrCategory, $arrDispMonth, $arrPayData) {
+    private function getSalaryData($arrDispMonth) {
+        $startDate = date("Y-m-01 00:00:00", strtotime($arrDispMonth[0]. "/01 00:00:00"));
+        $endDate   = date("Y-m-01 00:00:00", strtotime($arrDispMonth[self::DISP_MONTH - 1]. "/01 00:00:00"));
+        $builder = Models\Salary::select(DB::raw("IFNULL(sum(salary), 0) as salary"));
+        $builder->where('del_flg', '=', 0);
+        $builder->whereBetween('salary_date', [$startDate, $endDate]);
+        $builder->groupBy('salary_date');
+        $builder->orderBy('salary_date');
+        
+        return $builder->get()->toArray();
+    }
+
+    private function getSavingData($arrDispMonth) {
+        $startDate = date("Y-m-01 00:00:00", strtotime($arrDispMonth[0]. "/01 00:00:00"));
+        $endDate   = date("Y-m-01 00:00:00", strtotime($arrDispMonth[self::DISP_MONTH - 1]. "/01 00:00:00"));
+        $builder = Models\Saving::select(DB::raw("IFNULL(sum(savings), 0) as savings"));
+        $builder->where('del_flg', '=', 0);
+        $builder->whereBetween('saving_date', [$startDate, $endDate]);
+        $builder->groupBy('saving_date');
+        $builder->orderBy('saving_date');
+        
+        return $builder->get()->toArray();
+    }
+
+    private function createMoneyDetail($arrCategory, $arrDispMonth, $arrPayData, $arrSalaryData, $arrSavingData) {
         foreach ($arrDispMonth as $key => $dispMonth) {
             $tmpTotal = 0;
             $tmpSalary = 0;
@@ -116,13 +142,21 @@ class MoneyDetailController extends Controller
                         $tmpData = $tmpTotal;
                         break;
                     case 'salary':
-                        $tmpSalary = $tmpData = 270000;
+                        if (array_key_exists($key, $arrSalaryData)) {
+                            $tmpSalary = $tmpData = $arrSalaryData[$key]['salary'];
+                        } else {
+                            $tmpSalary = $tmpData = 0;
+                        }
                         break;
                     case 'withdrawal_amount':
                         $tmpData = 0;
                         break;
                     case 'savings':
-                        $tmpSavings = $tmpData = 20000;
+                        if (array_key_exists($key, $arrSavingData)) {
+                            $tmpSavings = $tmpData = $arrSavingData[$key]['savings'];
+                        } else {
+                            $tmpSavings = $tmpData = 0;
+                        }
                         break;
                     case 'balance1':
                         $tmpData = $tmpSalary - $tmpTotal;
