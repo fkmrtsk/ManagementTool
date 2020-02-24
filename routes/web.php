@@ -14,12 +14,17 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+// 金銭管理登録ページ
 Route::get('/money/register', 'Money\MoneyRegisterController@index')->name('money_register');
 Route::post('/money/register', 'Money\MoneyRegisterController@registerCheck')->name('money_registerCheck');
 Route::post('/money/confirm', 'Money\MoneyRegisterController@confirm')->name('money_confirm');
 Route::get('/money/complete', 'Money\MoneyRegisterController@complete')->name('money_complete');
+// 金銭管理詳細ページ
 Route::get('/money/detail', 'Money\MoneyDetailController@index')->name('money_detail');
+// 給料登録ページ
+Route::get('/money/salary/register', 'Money\MoneySalaryController@register')->name('money_salary_register');
+Route::post('/money/salary/register', 'Money\MoneySalaryController@registerCheck')->name('money_salary_registerCheck');
+Route::post('/money/salary/confirm', 'Money\MoneySalaryController@confirm')->name('money_salary_confirm');
+Route::get('/money/salary/complete', 'Money\MoneySalaryController@complete')->name('money_salary_complete');
