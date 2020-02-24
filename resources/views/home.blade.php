@@ -7,13 +7,19 @@
 @stop
 
 @section('content')
-<div class="col-md-6 card-blue">
-    <div class="card-header">Money Management</div>
-    <div class="card-body">
-        <div class="table-responsive">
+<div class="row">
+  <div class="col-md-6">
+    <div class="card card-primary">
+      <div class="card-header">Money Management</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="table-responsive">
             <canvas id="myChart"></canvas>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 @stop
 
