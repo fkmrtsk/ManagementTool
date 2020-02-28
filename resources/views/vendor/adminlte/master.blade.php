@@ -8,9 +8,8 @@
 @yield('title', config('adminlte.title', 'AdminLTE 3'))
 @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
     @if(! config('adminlte.enabled_laravel_mix'))
-    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script> -->
 
     @include('adminlte::plugins', ['type' => 'css'])
 
@@ -35,6 +34,8 @@
 <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('vendor/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('vendor/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
+<!-- php artisan vendor:publish --path="vendor/almasaeed2010/adminlte/plugins/tempusdominus-bootstrap-4/" "tempusdominus-bootstrap-4" -->
+<!-- <script src="{{ asset('tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js') }}"></script> -->
 
 @include('adminlte::plugins', ['type' => 'js'])
 
