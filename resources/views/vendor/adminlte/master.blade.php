@@ -34,8 +34,7 @@
 <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('vendor/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('vendor/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
-<!-- php artisan vendor:publish --path="vendor/almasaeed2010/adminlte/plugins/tempusdominus-bootstrap-4/" "tempusdominus-bootstrap-4" -->
-<!-- <script src="{{ asset('tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js') }}"></script> -->
+<script src="{{ asset('js/app.js') }}"></script>
 
 @include('adminlte::plugins', ['type' => 'js'])
 

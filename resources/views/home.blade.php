@@ -108,11 +108,11 @@ var myChart = new Chart(ctx, {
     }]
   }
 });
-// $(function () {
+$(function () {
   $('#calendar').datetimepicker({
     format: 'L',
     inline: true
   })
-// })
+})
 </script>
 @stop
